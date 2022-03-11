@@ -1,2 +1,5 @@
 require('./bootstrap');
-const $ = require( "jquery" );
+require('./calcul_billet');
+require('./calcul_piece');
+require('./calcul_centime');
+
