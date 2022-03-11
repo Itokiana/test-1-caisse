@@ -24,8 +24,12 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $operation_caisses = OperationCaisse::get();
+        $total_caisse = OperationCaisse::sum('total_operation');
+
         return view('home',[
-            'operation_caisses' => OperationCaisse::get()
+            'operation_caisses' => $operation_caisses,
+            'total_operation' => $total_caisse
         ]);
     }
 }

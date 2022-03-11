@@ -10,9 +10,11 @@
                         <div class="col-md-4">
                             <h2>Total caisse</h2>
                             <div class="row justify-content-center pt-5">
-                                <div class="col-md-4">
-                                    <strong class="total float-md-end">
-                                    <span>0</span>&nbsp;€
+                                <div class="col-md-12 text-center">
+                                    <strong class="total">
+                                    <span>
+                                        {{$total_operation}}
+                                    </span>&nbsp;€
                                     </strong>
                                 </div>
                             </div>
