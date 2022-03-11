@@ -18,9 +18,6 @@ return new class extends Migration
             $table->string('type_operation');
             $table->string('date_operation');
             $table->longText('note_operation');
-            $table->string('billets_operation');
-            $table->string('pieces_operation');
-            $table->string('centimes_operation');
             $table->integer('total_operation');
 
             $table->timestamps();

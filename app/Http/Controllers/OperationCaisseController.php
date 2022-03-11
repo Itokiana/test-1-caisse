@@ -32,14 +32,13 @@ class OperationCaisseController extends Controller
         $centimes_operation = $request->input('centimes_operation');
         $total_operation = $request->input('total_operation');
 
+        $total = $billets_operation + $pieces_operation + $centimes_operation;
+
         OperationCaisse::create([
             'type_operation' => $type_operation,
             'date_operation' => $date_operation,
             'note_operation' => $note_operation,
-            'billets_operation' => $billets_operation,
-            'pieces_operation' => $pieces_operation,
-            'centimes_operation' => $centimes_operation,
-            'total_operation' => $total_operation
+            'total_operation' => $total
         ]);
 
         return redirect('home');

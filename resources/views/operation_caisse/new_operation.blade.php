@@ -51,6 +51,10 @@
                       <label for="billet_select" class="form-label">Nominal</label>
                       <select id="billet_select" id="nominal_billet" class="form-select">
                         <option>0</option>
+                        <option>5</option>
+                        <option>10</option>
+                        <option>20</option>
+                        <option>50</option>
                         <option>100</option>
                         <option>200</option>
                         <option>500</option>
@@ -70,10 +74,6 @@
                   <div class="row">
                     <div class="col-md-4  offset-md-1">
                       <ul class="list-group" id="bloc_list_billet">
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                          A list item
-                          <button type="button" class="suppr_bloc_billet btn btn-sm btn-danger">x</button>
-                        </li>
                       </ul>
                     </div>
                   </div>
@@ -91,7 +91,7 @@
                       <select  id="piece_select" class="form-select">
                         <option>0</option>
                         <option>1</option>
-                        <option>5</option>
+                        <option>2</option>
                       </select>
                       <input type="hidden" id="pieces_operation" name="pieces_operation" />
                     </div>
@@ -103,6 +103,12 @@
                   <div class="row">
                     <div class="col-md-4 offset-md-1">
                       <button type="button" id="bouton_piece" class="btn btn-success mb-3 mt-3">Ajouter</button>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-4  offset-md-1">
+                      <ul class="list-group" id="bloc_list_piece">
+                      </ul>
                     </div>
                   </div>
                 </div>
@@ -119,7 +125,12 @@
                       <select id="centime_select" class="form-select">
                         <option>0</option>
                         <option>1</option>
+                        <option>2</option>
                         <option>5</option>
+                        <option>10</option>
+                        <option>20</option>
+                        <option>25</option>
+                        <option>50</option>
                       </select>
                       <input type="hidden" id="centimes_operation" name="centimes_operation" />
                     </div>
@@ -133,10 +144,17 @@
                       <button type="button"  id="bouton_centime" class="btn btn-success mb-3 mt-3">Ajouter</button>
                     </div>
                   </div>
+                  <div class="row">
+                    <div class="col-md-4  offset-md-1">
+                      <ul class="list-group" id="bloc_list_centime">
+                      </ul>
+                    </div>
+                  </div>
                 </div>
                 <div class="card-body">
                   <div class="row justify-content-center pt-5 pb-5">
                     <div class="col-auto">
+                      <input type="hidden" name="total_operation" id="total_operation"/>
                       <button type="submit" class="btn btn-secondary">Enregistrer</button>
                     </div>
                   </div>
