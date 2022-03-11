@@ -11,7 +11,7 @@
                     <h2>Entree de fond de caisse</h2>
                     <div class="row justify-content-center pt-5">
                       <div class="col-md-4 order-md-2">
-                        <strong class="total float-md-end">
+                        <strong id="valeur_total_operation" class="total float-md-end">
                           <span>0</span>&nbsp;€
                         </strong>
                       </div>
@@ -19,9 +19,9 @@
                         <div class="mb-3">
                           <label for="disabledSelect" class="form-label">Type d'operation</label>
                           <select id="disabledSelect" name="type_operation" class="form-select">
-                            <option>dépôt de caisse</option>
-                            <option>remise en banque</option>
-                            <option>retrait</option>
+                            @foreach($type_operations as $type_operation)
+                              <option value="{{ $type_operation['id'] }}">{{ $type_operation['title'] }}</option>
+                            @endforeach
                           </select>
                         </div>
                         <div class="mb-3">
@@ -154,7 +154,7 @@
                 <div class="card-body">
                   <div class="row justify-content-center pt-5 pb-5">
                     <div class="col-auto">
-                      <input type="hidden" name="total_operation" id="total_operation"/>
+                      <input type="hidden" name="total_operation" id="total_operation" value="5"/>
                       <button type="submit" class="btn btn-secondary">Enregistrer</button>
                     </div>
                   </div>

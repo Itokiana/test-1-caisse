@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('operation_caisses', function (Blueprint $table) {
             $table->id();
-            $table->string('type_operation');
+            $table->integer('type_operation');
             $table->string('date_operation');
             $table->longText('note_operation');
             $table->integer('total_operation');

@@ -26,3 +26,5 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::get('/new-operation', [OperationCaisseController::class, 'new_operation']);
 Route::post('/create-operation', [OperationCaisseController::class, 'create_operation']);
+Route::post('/update-operation/{id}', [OperationCaisseController::class, 'edit_operation']);
+Route::get('/delete-operation/{id}', [OperationCaisseController::class, 'confirm_delete_operation']);

@@ -11,8 +11,23 @@ const calcul_bloc = (nominal, quantite) => {
   return nominal * quantite;
 }
 
-const somme_bloc = (array_bloc) => {
-  return array_bloc.map(item => item.sous_total).reduce((prev, curr) => prev + curr, 0);
+const render_total = (table_centime) => {
+  let total_centime = table_centime.map(item => item.sous_total).reduce((prev, curr) => prev + curr, 0);
+
+  $("#total_centime").text(total_centime)
+  return total_centime;
+}
+
+const render_centime = (table_centime) => {
+  $("#bloc_list_centime").html(null)
+  table_centime.map(({ quantite_centime, nominal_centime } , key) => {
+    $("#bloc_list_centime").append(`<li id="bloc_centime_${key}" class="list-group-item d-flex justify-content-between align-items-center">
+      ${quantite_centime+'x'+nominal_centime+''+'='+ calcul_bloc(parseInt(nominal_centime), parseInt(quantite_centime))}
+      <button id="${key}" key="${key}" type="button" class="suppr_bloc_centime btn btn-sm btn-danger">x</button>
+    </li>`);
+  })
+
+  render_total(table_centime);
 }
 
 $("#centime_select").change(e => {
@@ -22,33 +37,30 @@ $("#quantite3").change(e => {
   quantite_centime = parseInt(e.target.value);
 })
 
-$("#bouton_centime").click(() => {
-  index_centime = index_centime + 1;
+$("#bouton_centime").on('click', () => {
   table_centime.push({ 
-    id: index_centime,
+    quantite_centime: parseInt(quantite_centime),
+    nominal_centime: parseInt(nominal_centime),
     sous_total: calcul_bloc(parseInt(nominal_centime), parseInt(quantite_centime))
   });
 
-  total_centime = somme_bloc(table_centime);
-
-  $("#total_centime").text(total_centime)
-  $("#centimes_operation").val(total_centime)
-  $("#bloc_list_centime").append(`<li id="bloc_centime_${index_centime + 1}" class="list-group-item d-flex justify-content-between align-items-center">
-      ${quantite_centime+'x'+nominal_centime+''+'='+ calcul_bloc(parseInt(nominal_centime), parseInt(quantite_centime))}
-      <button id="${index_centime + 1}" type="button" class="suppr_bloc_centime btn btn-sm btn-danger">x</button>
-    </li>`)
+  render_centime(table_centime);
 
   quantite_centime = 0;
   $("#quantite3").val("0");
 })
 
-$("#bloc_list_centime").on('click', 'button.suppr_bloc_centime', e => {
-  table_centime = table_centime.filter( centime => centime.id !== e.target.id)
+$(document).on('click', '#bloc_list_centime li', e => {
+  const index = parseInt(e.target.id);
 
-  total_centime = somme_bloc(table_centime);
-  $("#total_centime").text(total_centime)
-  $("#centimes_operation").val(total_centime)
+  table_centime = [
+    ...table_centime.slice(0, index),
+    ...table_centime.slice(index + 1)
+  ]
 
-  $(`#bloc_centime_${e.target.id}`).remove()
+  console.log(`index`, index)
 
+  render_centime(table_centime);
+
+  $("#centimes_operation").val(total_centime);
 })

@@ -32,30 +32,27 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                        <td>
-                                            <a class="btn btn-sm btn-primary">Editer</a>
-                                            <a class="btn btn-sm btn-danger">Supprimer</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                        <td>
-                                            <a class="btn btn-sm btn-primary">Editer</a>
-                                            <a class="btn btn-sm btn-danger">Supprimer</a>
-                                        </td>
-                                    </tr>
+                                    @if (count($operation_caisses) !== 0)
+                                        @foreach ($operation_caisses as $operation_caisse)
+                                        <tr>
+                                            <td>{{ $operation_caisse->date_operation }}</td>
+                                            <td>{{ $operation_caisse->type_operation }}</td>
+                                            <td>{{ $operation_caisse->total_operation }}</td>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>{{ $operation_caisse->total_operation }}</td>
+                                            <td>
+                                                <a class="btn btn-sm btn-primary">Editer</a>
+                                                <a class="btn btn-sm btn-danger">Supprimer</a>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    @else
+                                        <tr>
+                                            <td colspan="7">Aucun donnee n'est encore enregistree dans la base de donnees</td>
+                                        </tr>
+                                    @endif
+                                    
                                 </tbody>
                             </table>
                         </div>
