@@ -11286,7 +11286,7 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
-.card-body > h2, .card-body > .h2 {
+.card-body h2, .card-body .h2 {
   border-bottom: 3px solid #f0bd32;
 }
 

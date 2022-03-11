@@ -22,6 +22,6 @@ Route::get('/', function () {
 
 Auth::routes(['register' => false, 'password.request' => false, 'reset' => false]);
 
-Route::get('/dashboard', [HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::get('/new-operation', [OperationCaisseController::class, 'new_operation']);
