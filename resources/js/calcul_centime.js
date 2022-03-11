@@ -11,11 +11,16 @@ const calcul_bloc = (nominal, quantite) => {
   return nominal * quantite;
 }
 
-const render_total = (table_centime) => {
-  let total_centime = table_centime.map(item => item.sous_total).reduce((prev, curr) => prev + curr, 0);
+const somme_bloc = (array_bloc) => {
+  return array_bloc.map(item => item.sous_total).reduce((prev, curr) => prev + curr, 0);
+}
 
-  $("#total_centime").text(total_centime)
-  return total_centime;
+const render_total = (table_centime) => {
+  let _total_centime = table_centime.map(item => item.sous_total).reduce((prev, curr) => prev + curr, 0);
+
+  $("#total_centime").text(_total_centime)
+
+  return _total_centime;
 }
 
 const render_centime = (table_centime) => {
@@ -27,7 +32,7 @@ const render_centime = (table_centime) => {
     </li>`);
   })
 
-  render_total(table_centime);
+  total_centime = render_total(table_centime);
 }
 
 $("#centime_select").change(e => {
@@ -44,6 +49,10 @@ $("#bouton_centime").on('click', () => {
     sous_total: calcul_bloc(parseInt(nominal_centime), parseInt(quantite_centime))
   });
 
+  total_centime = somme_bloc(table_centime);
+
+  $("#centimes_operation").val(total_centime).trigger('change');
+
   render_centime(table_centime);
 
   quantite_centime = 0;
@@ -58,9 +67,19 @@ $(document).on('click', '#bloc_list_centime li', e => {
     ...table_centime.slice(index + 1)
   ]
 
-  console.log(`index`, index)
+  total_centime = somme_bloc(table_centime);
+
+  $("#centimes_operation").val(total_centime).trigger('change');
 
   render_centime(table_centime);
+})
 
-  $("#centimes_operation").val(total_centime);
+$("#centimes_operation").change(() => {
+  let total_piece = parseInt($("#pieces_operation").val()) || 0
+  let total_billet = parseInt($("#billets_operation").val()) || 0
+
+  let valeur_total_operation = total_billet + total_piece + total_centime;
+
+  $("#valeur_total_operation").text(valeur_total_operation);
+  $("#total_operation").val(valeur_total_operation);
 })

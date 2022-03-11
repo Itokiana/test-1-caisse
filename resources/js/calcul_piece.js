@@ -11,10 +11,15 @@ const calcul_bloc = (nominal, quantite) => {
   return nominal * quantite;
 }
 
+const somme_bloc = (array_bloc) => {
+  return array_bloc.map(item => item.sous_total).reduce((prev, curr) => prev + curr, 0);
+}
+
 const render_total = (table_piece) => {
   let total_piece = table_piece.map(item => item.sous_total).reduce((prev, curr) => prev + curr, 0);
 
   $("#total_piece").text(total_piece)
+  
   return total_piece;
 }
 
@@ -43,6 +48,10 @@ $("#bouton_piece").on('click', () => {
     sous_total: calcul_bloc(parseInt(nominal_piece), parseInt(quantite_piece))
   });
 
+  total_piece = somme_bloc(table_piece);
+
+  $("#pieces_operation").val(total_piece).trigger('change');
+
   render_piece(table_piece);
 
   quantite_piece = 0;
@@ -57,7 +66,18 @@ $(document).on('click', '#bloc_list_piece li', e => {
     ...table_piece.slice(index + 1)
   ]
 
-  render_piece(table_piece);
+  total_piece = somme_bloc(table_piece);
+  
+  $("#pieces_operation").val(total_piece).trigger('change');
 
-  $("#pieces_operation").val(total_piece);
+  render_piece(table_piece);
+})
+
+$("#pieces_operation").change(() => {
+  let total_billet = parseInt($("#billets_operation").val()) || 0
+  let total_centime = parseInt($("#centimes_operation").val()) || 0
+
+  let valeur_total_operation = total_billet + total_piece + total_centime;
+  $("#valeur_total_operation").text(valeur_total_operation);
+  $("#total_operation").val(valeur_total_operation);
 })

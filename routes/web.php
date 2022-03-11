@@ -24,7 +24,8 @@ Auth::routes(['register' => false, 'password.request' => false, 'reset' => false
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-Route::get('/new-operation', [OperationCaisseController::class, 'new_operation']);
+Route::get('/new-operation', [OperationCaisseController::class, 'new_operation'])->name('new_operation');
 Route::post('/create-operation', [OperationCaisseController::class, 'create_operation']);
 Route::post('/update-operation/{id}', [OperationCaisseController::class, 'edit_operation']);
-Route::get('/delete-operation/{id}', [OperationCaisseController::class, 'confirm_delete_operation']);
+Route::get('/confirm-delete-operation/{id}', [OperationCaisseController::class, 'confirm_delete_operation'])->name("confirm_delete_operation");
+Route::delete('/delete-operation/{id}', [OperationCaisseController::class, 'delete_operation'])->name("delete_operation");

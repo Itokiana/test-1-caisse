@@ -6,7 +6,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <form>
+                    <form method="delete" action="{{ url('/delete-operation/'.$id) }}">
                       <div class="row">
                         <p class="col-auto h4">Etes-vous sur de vouloir supprimer l'operation ?</p>
                       </div>

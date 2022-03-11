@@ -79,14 +79,21 @@ class OperationCaisseController extends Controller
 
     public function confirm_delete_operation($id = null)
     {
-        return view('operation_caisse.confirm_delete_operation');
+        if(!empty($id)){
+            return view('operation_caisse.confirm_delete_operation', [ 'id' => $id ]);
+        }
+        return redirect('home');
     }
 
     public function delete_operation($id = null)
     {
         if(!empty($id))
         {
-            OperationCaisse::where('id', $id)->delete();
+            $operation = OperationCaisse::OperationCaisse::where('id', $id);
+            if(!empty($operation))
+            {
+                $operation->delete();
+            }
         }
         return redirect('home');
     }

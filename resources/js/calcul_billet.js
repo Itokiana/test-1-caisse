@@ -57,6 +57,7 @@ $("#bouton_billet").on('click', () => {
 
   quantite_billet = 0;
   $("#quantite").val("0");
+  $("#billets_operation").val(total_billet).trigger('change');
 })
 
 $(document).on('click', '#bloc_list_billet li', e => {
@@ -67,9 +68,18 @@ $(document).on('click', '#bloc_list_billet li', e => {
     ...table_billet.slice(index + 1)
   ]
 
-  console.log(`index`, index)
+  total_billet = somme_bloc(table_billet);
 
   render_billet(table_billet);
 
-  $("#billets_operation").val(total_billet);
+  $("#billets_operation").val(total_billet).trigger('change');
+})
+
+$("#billets_operation").change(() => {
+  let total_piece = parseInt($("#pieces_operation").val()) || 0
+  let total_centime = parseInt($("#centimes_operation").val()) || 0
+
+  let valeur_total_operation = total_billet + total_piece + total_centime;
+  $("#valeur_total_operation").text(valeur_total_operation);
+  $("#total_operation").val(valeur_total_operation);
 })

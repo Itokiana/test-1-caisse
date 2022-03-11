@@ -11,8 +11,8 @@
                     <h2>Entree de fond de caisse</h2>
                     <div class="row justify-content-center pt-5">
                       <div class="col-md-4 order-md-2">
-                        <strong id="valeur_total_operation" class="total float-md-end">
-                          <span>0</span>&nbsp;€
+                        <strong  class="total float-md-end">
+                          <span id="valeur_total_operation">0</span>&nbsp;€
                         </strong>
                       </div>
                       <div class="col-md-6">
