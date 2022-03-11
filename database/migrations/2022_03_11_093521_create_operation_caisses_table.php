@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('operation_caisses', function (Blueprint $table) {
             $table->id();
-            $table->integer('type_operation');
-            $table->string('date_operation');
-            $table->longText('note_operation');
-            $table->integer('total_operation');
+            $table->enum('type_operation', ['depot', 'remise_bank', 'retrait']);
+            $table->date('date_operation');
+            $table->longText('note_operation')->nullable();
+            $table->integer('total_operation')->default('0');
 
             $table->timestamps();
         });

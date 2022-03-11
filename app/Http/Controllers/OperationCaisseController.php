@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\OperationCaisse;
 
 class OperationCaisseController extends Controller
 {
@@ -20,9 +21,9 @@ class OperationCaisseController extends Controller
     public function new_operation()
     {
         $type_operations = array(
-            array('id' => 1, 'title' => 'dépôt de caisse'),
-            array('id' => 2, 'title' => 'remise en banque'),
-            array('id' => 3, 'title' => 'retrait'),
+            array('id' => 'depot', 'title' => 'dépôt de caisse'),
+            array('id' => 'remise_bank', 'title' => 'remise en banque'),
+            array('id' => 'retrait', 'title' => 'retrait'),
         );
         return view('operation_caisse.new_operation', [
             'type_operations' => $type_operations
@@ -31,21 +32,22 @@ class OperationCaisseController extends Controller
 
     public function create_operation(Request $request)
     {
+        $validated = $request->validate([
+            'type_operation' => 'required',
+            'date_operation' => 'required',
+        ]);
+
         $type_operation = $request->input('type_operation');
         $date_operation = $request->input('date_operation');
         $note_operation = $request->input('note_operation');
-        $billets_operation = $request->input('billets_operation');
-        $pieces_operation = $request->input('pieces_operation');
-        $centimes_operation = $request->input('centimes_operation');
         $total_operation = $request->input('total_operation');
 
-        $total = $billets_operation + $pieces_operation + $centimes_operation;
 
         OperationCaisse::create([
             'type_operation' => $type_operation,
-            'date_operation' => $date_operation,
+            'date_operation' => date('Y-m-d', strtotime($date_operation)),
             'note_operation' => $note_operation,
-            'total_operation' => $total
+            'total_operation' => intval($total_operation)
         ]);
 
         return redirect('home');
@@ -57,21 +59,25 @@ class OperationCaisseController extends Controller
         return view('operation_caisse.new_operation');
     }
     
-    public function update_operation(Request $request)
+    public function update_operation($id = null, Request $request)
     {
+        $validated = $request->validate([
+            'type_operation' => 'required',
+            'date_operation' => 'required',
+        ]);
+
         $type_operation = $request->input('type_operation');
         $date_operation = $request->input('date_operation');
         $note_operation = $request->input('note_operation');
-        $billets_operation = $request->input('billets_operation');
-        $pieces_operation = $request->input('pieces_operation');
-        $centimes_operation = $request->input('centimes_operation');
         $total_operation = $request->input('total_operation');
 
-        OperationCaisse::update([
+        $operation_caisse = OperationCaisse::where('id', $id)->first();
+
+        $operation_caisse->update([
             'type_operation' => $type_operation,
-            'date_operation' => $date_operation,
+            'date_operation' => date('Y-m-d', strtotime($date_operation)),
             'note_operation' => $note_operation,
-            'total_operation' => $total_operation
+            'total_operation' => intval($total_operation)
         ]);
 
         return redirect('home');
@@ -89,7 +95,8 @@ class OperationCaisseController extends Controller
     {
         if(!empty($id))
         {
-            $operation = OperationCaisse::OperationCaisse::where('id', $id);
+            dd($id);
+            $operation = OperationCaisse::where('id', $id)->first();
             if(!empty($operation))
             {
                 $operation->delete();
