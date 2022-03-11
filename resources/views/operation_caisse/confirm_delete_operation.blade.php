@@ -6,7 +6,9 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <form method="delete" action="{{ url('/delete-operation/'.$id) }}">
+                    <form method="post" action="{{ url('/delete-operation/'.$id) }}">
+                      @csrf
+                      @method('delete')
                       <div class="row">
                         <p class="col-auto h4">Etes-vous sur de vouloir supprimer l'operation ?</p>
                       </div>

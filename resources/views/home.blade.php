@@ -36,10 +36,23 @@
                                         @foreach ($operation_caisses as $operation_caisse)
                                         <tr>
                                             <td>{{ $operation_caisse->date_operation }}</td>
-                                            <td>{{ $operation_caisse->type_operation }}</td>
+                                            <td>
+                                                @switch($operation_caisse->type_operation)
+                                                    @case('depot')
+                                                        Dépôt de caisse
+                                                        @break
+                                                
+                                                    @case('remise_bank')
+                                                        Remise en banque
+                                                        @break
+                                                
+                                                    @default
+                                                        Retrait
+                                                @endswitch
+                                            </td>
                                             <td>{{ $operation_caisse->total_operation }}</td>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
+                                            <td></td>
+                                            <td></td>
                                             <td>{{ $operation_caisse->total_operation }}</td>
                                             <td>
                                                 <a class="btn btn-sm btn-primary">Editer</a>

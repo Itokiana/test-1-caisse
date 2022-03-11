@@ -95,7 +95,6 @@ class OperationCaisseController extends Controller
     {
         if(!empty($id))
         {
-            dd($id);
             $operation = OperationCaisse::where('id', $id)->first();
             if(!empty($operation))
             {
