@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\OperationCaisseController;
+use App\Http\Controllers\HomeController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,4 +22,6 @@ Route::get('/', function () {
 
 Auth::routes(['register' => false, 'password.request' => false, 'reset' => false]);
 
-Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/dashboard', [HomeController::class, 'index'])->name('home');
+
+Route::get('/new-operation', [OperationCaisseController::class, 'new_operation']);
