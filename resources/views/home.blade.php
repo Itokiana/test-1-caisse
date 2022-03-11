@@ -57,7 +57,7 @@
                                             <td></td>
                                             <td>{{ $operation_caisse->total_operation }}</td>
                                             <td>
-                                                <a class="btn btn-sm btn-primary">Editer</a>
+                                                <a href="{{url('/edit-operation/'.$operation_caisse->id)}}" class="btn btn-sm btn-primary">Editer</a>
                                                 <a href="{{url('/confirm-delete-operation/'.$operation_caisse->id)}}" class="btn btn-sm btn-danger">Supprimer</a>
                                             </td>
                                         </tr>
