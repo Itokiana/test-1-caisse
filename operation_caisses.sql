@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le : ven. 11 mars 2022 à 14:05
+-- Généré le : ven. 11 mars 2022 à 20:19
 -- Version du serveur : 10.4.22-MariaDB
 -- Version de PHP : 8.1.2
 
@@ -29,13 +29,20 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `operation_caisses` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `type_operation` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `date_operation` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `note_operation` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `total_operation` int(11) NOT NULL,
+  `type_operation` enum('depot','remise_bank','retrait') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `date_operation` date NOT NULL,
+  `note_operation` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `total_operation` int(11) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `operation_caisses`
+--
+
+INSERT INTO `operation_caisses` (`id`, `type_operation`, `date_operation`, `note_operation`, `total_operation`, `created_at`, `updated_at`) VALUES
+(4, 'remise_bank', '2022-03-13', 'sakfha klasjf lasjf ljkl', 1800, '2022-03-11 15:23:55', '2022-03-11 15:23:55');
 
 --
 -- Index pour les tables déchargées
@@ -55,7 +62,7 @@ ALTER TABLE `operation_caisses`
 -- AUTO_INCREMENT pour la table `operation_caisses`
 --
 ALTER TABLE `operation_caisses`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
