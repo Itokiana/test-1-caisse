@@ -53,8 +53,20 @@
                                                 @endswitch
                                             </td>
                                             <td>{{ $operation_caisse->total_operation }}</td>
-                                            <td></td>
-                                            <td></td>
+                                            <td>
+                                                @if ($operation_caisse->type_operation == 'retrait' )
+                                                    {{$operation_caisse->total_operation}}
+                                                @else
+                                                    0
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if ($operation_caisse->type_operation == 'depot' || $operation_caisse->type_operation == 'remise_bank' )
+                                                    {{$operation_caisse->total_operation}}
+                                                @else
+                                                    0
+                                                @endif
+                                            </td>
                                             <td>{{ $operation_caisse->total_operation }}</td>
                                             <td>
                                                 <a href="{{url('/edit-operation/'.$operation_caisse->id)}}" class="btn btn-sm btn-primary">Editer</a>
