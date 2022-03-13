@@ -66,7 +66,8 @@ class OperationCaisseController extends Controller
 
         return view('operation_caisse.edit_operation', [
             'type_operations' => $type_operations,
-            'operation' => $operation
+            'operation' => $operation,
+            'id' => $id
         ]);
     }
     

@@ -4,8 +4,9 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
-          <form method="post" action="{{url('/create-operation')}}" >
+          <form method="post" action="{{url('/update-operation/'.$id)}}" >
             @csrf
+            @method('put')
             <div class="card">
                 <div class="card-body">
                     <h2>Entree de fond de caisse</h2>
